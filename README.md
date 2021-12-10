@@ -2,10 +2,10 @@
 
 # in order to run this project on your mac:
 
-#  clone the repository
-#  npm install
-#  node src/server.js
-#  npm start :)
+-  clone the repository
+-  npm install
+-  node src/server.js
+-  npm start :)
 
 
 This project was bootstrapped with Create React App.
