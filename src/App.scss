@@ -108,6 +108,11 @@ body {
     &--highlighted {
       background-color: rgba(221, 159, 66, 0.12);
       color: #DD9F42;
+
+      &--first {
+        border-bottom-left-radius: 32px;
+        border-bottom-right-radius: 32px;
+      }
     }
 
     &::after {
@@ -150,7 +155,6 @@ body {
 }
 
 .description {
-  position: fixed;
   z-index: 24;
   height: 500px;
   width: 500px;

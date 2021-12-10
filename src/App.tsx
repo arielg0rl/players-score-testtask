@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Description from './components/Description';
 
 import './App.scss';
 
 import { Empty } from './components/Empty';
 import { PlayersList } from './components/PlayersList';
 import { IPlayer } from './types';
+import { Route, Routes } from 'react-router';
+
 
 export const App: React.FC = () => {
   const [ players, setPlayers ] = useState<IPlayer[]>([]);
-  console.log(players.length);
+  const [ selectedPlayer, setSelectedPlayer ] = useState<IPlayer>()
 
   useEffect(() => {
     const item = window.localStorage.getItem('players');
@@ -27,6 +30,10 @@ export const App: React.FC = () => {
     }
   }, [])
 
+  const choosePlayer = (playerFromEvent: IPlayer): void => {
+    setSelectedPlayer(playerFromEvent);
+  }
+
   return (
     <div className="wrapper">
       <div className="App">
@@ -37,8 +44,16 @@ export const App: React.FC = () => {
             ?
             <Empty />
             :
-            <PlayersList players={players}/>
+            <PlayersList onSelect={choosePlayer} players={players}/>
           }
+          {selectedPlayer && (
+          <Routes>
+            <Route
+              path={`/player/${selectedPlayer.name}`}
+              element={(<Description player={selectedPlayer as IPlayer} />)}
+            />
+          </Routes>
+          )}
         </div>
       </div>
     </div>

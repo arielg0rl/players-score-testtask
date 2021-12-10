@@ -2,22 +2,19 @@ import React, { useEffect, useState } from "react"
 import { IPlayer } from "../types"
 import { Link } from 'react-router-dom';
 import classNames from "classnames";
-import Description from "./Description";
-import Modal from 'react-modal';
 
 export interface Props {
   players: IPlayer[];
+  onSelect: (playerFromEvent: IPlayer) => void;
 }
 
-export const PlayersList: React.FC<Props> = ({ players }) => {
+export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
   const [ sortBy, setSortBy ] = useState<string>('Score');
   const [ scoreLeader, setScoreLeader ] = useState<IPlayer>();
   const [ addNewLeaderStyle, setAddNewLeaderStyle ] = useState<boolean>(false);
-  const [ showModal, setShowModal ] = useState(false);
-  const [ clickedPlayer, setClickedPlayer ] = useState<IPlayer>();
 
   useEffect(() => {
-    const newBoard = players.sort((player1, player2) => player1.score - player2.score);
+    const newBoard = players.sort((player1, player2) => player2.score - player1.score);
     if (newBoard[0].name === scoreLeader?.name) {
       return;
     }
@@ -59,11 +56,10 @@ export const PlayersList: React.FC<Props> = ({ players }) => {
             <Link style={{ textDecoration: 'none' }} to={`/player/${player.name}`}>
               <div
                 onClick={(): void => {
-                  setShowModal(true)
-                  setClickedPlayer(player)
+                  onSelect(player)
                 }}
                 key={player.name}
-                className={classNames('playersList__Player', {'playersList__Player--highlighted': (addNewLeaderStyle && i === 0)})}
+                className={classNames('playersList__Player', {'playersList__Player--highlighted': (addNewLeaderStyle && i === 0)}, {'playersList__Player--highlighted--first': (players.length === 1)})}
               >
               <div className="playersList__Player-ava-name">
                 <img
@@ -78,11 +74,6 @@ export const PlayersList: React.FC<Props> = ({ players }) => {
             </Link>
           )
         })
-      }
-      {showModal &&
-      <Modal>
-        <Description player={clickedPlayer ? clickedPlayer : null} />
-      </Modal>
       }
     </div>
   )
