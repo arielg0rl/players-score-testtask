@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import './App.css';
+import './App.scss';
 
 import { Empty } from './components/Empty';
 import { PlayersList } from './components/PlayersList';
@@ -8,6 +8,7 @@ import { IPlayer } from './types';
 
 export const App: React.FC = () => {
   const [ players, setPlayers ] = useState<IPlayer[]>([]);
+  console.log(players.length);
 
   useEffect(() => {
     const item = window.localStorage.getItem('players');
@@ -18,8 +19,6 @@ export const App: React.FC = () => {
     window.localStorage.setItem('players', JSON.stringify(players));
   }, [players]);
 
-
-
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000');
 
@@ -27,15 +26,6 @@ export const App: React.FC = () => {
       setPlayers((prev: IPlayer[]) => [...prev, JSON.parse(event.data)]);
     }
   }, [])
-
-
-  useEffect(() => {
-    const eventSource = new EventSource('http://localhost:5000');
-
-    eventSource.onmessage = function(event) {
-      setPlayers((prev: IPlayer[]) => [...prev, JSON.parse(event.data)]);
-    }
-  }, [players])
 
   return (
     <div className="wrapper">
