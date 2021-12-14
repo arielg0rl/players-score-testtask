@@ -4,7 +4,7 @@
 -  npm install
 -  npm start
 -  node src/server.js
--  
+
 [FIGMA DESIGN](https://www.figma.com/file/qowV3yFZcgCEIcDXC3ii6o/Front-end-test-task?node-id=0%3A1)
 
 
