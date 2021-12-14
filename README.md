@@ -2,8 +2,8 @@
 
 -  clone the repository
 -  npm install
--  npm start
--  node src/server.js
+-  npm start (to open in Your web browser on local host)
+-  node src/server.js (to run the back server)
 
 [FIGMA DESIGN](https://www.figma.com/file/qowV3yFZcgCEIcDXC3ii6o/Front-end-test-task?node-id=0%3A1)
 
@@ -16,28 +16,11 @@
 * App has responsive design
 * App receive data from server via SSE (server-sent events)
 
-## How to start project
-
-* Fork the repository
-* Clone the forked repo
-* Open terminal and write `cd client` to open `Client` directory
-* Open one more terminal and write `cd server` to open `Server` directory
-
-Next commands use in Client and Server directories:
-
-### Client directory
-* Run `npm install` to install the dependencies
-* Run `npm start` to run a development server at `http://localhost:3000`
-
-### Server directory
-* Run `npm install` to install the dependencies
-* Run `npm start` to start the server
-
 ## App Tech Info:
 
-* completed with Typescript
-* use preprocessor Sass
+* Typescript
+* Sass
 * routing completed by react-router
-* use classNames package
+* classNames package
 * use faker for adding people every 5 sec
 * people info and people score sort order store in local storage
