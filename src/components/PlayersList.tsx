@@ -53,7 +53,7 @@ export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
       : players.sort((a, b) => a.name.localeCompare(b.name)))
         .map((player, i) => {
           return (
-            <Link style={{ textDecoration: 'none' }} to={`/player/${player.name}`}>
+            <Link style={{ textDecoration: 'none' }} to={`/player/${player.name.split(' ').join('_')}`}>
               <div
                 onClick={(): void => {
                   onSelect(player)

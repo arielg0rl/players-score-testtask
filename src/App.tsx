@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Description from './components/Description';
+import classNames from 'classnames';
 
 import './App.scss';
 
@@ -11,7 +12,7 @@ import { Route, Routes } from 'react-router';
 
 export const App: React.FC = () => {
   const [ players, setPlayers ] = useState<IPlayer[]>([]);
-  const [ selectedPlayer, setSelectedPlayer ] = useState<IPlayer>()
+  const [ selectedPlayer, setSelectedPlayer ] = useState<IPlayer | null>()
 
   useEffect(() => {
     const item = window.localStorage.getItem('players');
@@ -33,9 +34,13 @@ export const App: React.FC = () => {
   const choosePlayer = (playerFromEvent: IPlayer): void => {
     setSelectedPlayer(playerFromEvent);
   }
+  
+  const onClose = () => {
+    setSelectedPlayer(null);
+  }
 
   return (
-    <div className="wrapper">
+    <div className={classNames("wrapper", {"wrapper-blured": selectedPlayer})}>
       <div className="App">
         <div className="container">
           <h1 className="App__h1">Score board</h1>
@@ -49,8 +54,8 @@ export const App: React.FC = () => {
           {selectedPlayer && (
           <Routes>
             <Route
-              path={`/player/${selectedPlayer.name}`}
-              element={(<Description player={selectedPlayer as IPlayer} />)}
+              path={`/player/${selectedPlayer?.name.split(' ').join('_')}`}
+              element={(<Description onClose={onClose} player={selectedPlayer as IPlayer} />)}
             />
           </Routes>
           )}
