@@ -1,4 +1,4 @@
-#№ in order to run this project on your mac:
+# in order to run this project on your mac:
 
 -  clone the repository
 -  npm install
