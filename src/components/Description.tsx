@@ -54,5 +54,3 @@ export const Description: React.FC<Props> = ({ onClose, player }) => {
 }
 
 export default Description
-
-// Link to={`/player/${player.name}`}

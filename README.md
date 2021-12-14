@@ -4,8 +4,8 @@
 
 -  clone the repository
 -  npm install
+-  npm start
 -  node src/server.js
--  npm start :)
 
 
 This project was bootstrapped with Create React App.
