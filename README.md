@@ -10,11 +10,11 @@
 
 ## Description
 
-* App on React that include 2 pages with routes
+* App on React includes 2 pages with routes
   - `/` – Index
   - `/player/{player-name}` – Details
 * App has responsive design
-* App receive data from server via SSE (server-sent events)
+* App receives data from server via SSE (server-sent events)
 
 ## App Tech Info:
 
