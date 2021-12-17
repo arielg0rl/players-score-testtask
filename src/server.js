@@ -11,10 +11,10 @@ http.createServer((_request, response) => {
     setInterval(() => {
         response.write(
             `data: ${JSON.stringify({
-								avatar: `https://source.unsplash.com/random/200x200?sig=${Math.random()}`,
+                avatar: `https://source.unsplash.com/random/200x200?sig=${Math.random()}`,
                 name: `${faker.name.firstName()} ${faker.name.lastName()}`,
                 score: Math.round(Math.random() * 1000),
-								bio: faker.lorem.sentences(),
+                bio: faker.lorem.sentences(),
             })}`
         );
         response.write('\n\n');

@@ -243,8 +243,8 @@ body {
 }
 
 .rotate-center {
-	-webkit-animation: rotate-center 1s ease-in-out both infinite;
-	        animation: rotate-center 1s ease-in-out both infinite;
+  -webkit-animation: rotate-center 1s ease-in-out both infinite;
+  animation: rotate-center 1s ease-in-out both infinite;
 }
 
 @-webkit-keyframes rotate-center {

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react"
-import { IPlayer } from "../types"
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from "classnames";
+import classNames from 'classnames';
+import { IPlayer } from '../types';
 
 export interface Props {
   players: IPlayer[];
   onSelect: (playerFromEvent: IPlayer) => void;
 }
 
-export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
-  const [ sortBy, setSortBy ] = useState<string>('Score');
-  const [ scoreLeader, setScoreLeader ] = useState<IPlayer>();
-  const [ addNewLeaderStyle, setAddNewLeaderStyle ] = useState<boolean>(false);
+export var PlayersList: React.FC<Props> = function ({ onSelect, players }) {
+  const [sortBy, setSortBy] = useState<string>('Score');
+  const [scoreLeader, setScoreLeader] = useState<IPlayer>();
+  const [addNewLeaderStyle, setAddNewLeaderStyle] = useState<boolean>(false);
 
   useEffect(() => {
     const newBoard = players.sort((player1, player2) => player2.score - player1.score);
@@ -20,27 +20,26 @@ export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
     }
 
     setScoreLeader(newBoard[0]);
-  }, [players])
+  }, [players]);
 
   useEffect(() => {
     setAddNewLeaderStyle(true);
 
     setTimeout(() => {
       setAddNewLeaderStyle(false);
-    }, 1000)
-
+    }, 1000);
   }, [scoreLeader]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
-  }
+  };
 
   return (
     <div className="playersList">
       <div className="playersList__header">
         <div className="playersList__header-name">Player's name</div>
         <select
-        className="playersList__header-select"
+          className="playersList__header-select"
           name="Sort by"
           value={sortBy}
           onChange={handleSortChange}
@@ -50,17 +49,19 @@ export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
         </select>
       </div>
       {(sortBy === 'Score' ? players.sort((a, b) => b.score - a.score)
-      : players.sort((a, b) => a.name.localeCompare(b.name)))
-        .map((player, i) => {
-          return (
-            <Link style={{ textDecoration: 'none' }} to={`/player/${player.name.split(' ').join('_')}`}>
-              <div
-                onClick={(): void => {
-                  onSelect(player)
-                }}
-                key={player.name}
-                className={classNames('playersList__Player', {'playersList__Player--highlighted': (addNewLeaderStyle && i === 0)}, {'playersList__Player--highlighted--first': (players.length === 1)})}
-              >
+        : players.sort((a, b) => a.name.localeCompare(b.name)))
+        .map((player, i) => (
+          <Link style={{ textDecoration: 'none' }} to={`/player/${player.name.split(' ').join('_')}`}>
+            <div
+              onClick={(): void => {
+                onSelect(player);
+              }}
+              key={player.name}
+              className={classNames('playersList__Player',
+                { 'playersList__Player--highlighted': (addNewLeaderStyle && i === 0) },
+                { 'playersList__Player--highlighted--first': (players.length === 1) }
+              )}
+            >
               <div className="playersList__Player-ava-name">
                 <img
                   className="playersList__Player-avatar"
@@ -70,11 +71,9 @@ export const PlayersList: React.FC<Props> = ({ onSelect, players }) => {
                 <div className="playersList__Player-name">{player.name}</div>
               </div>
               <div className="playersList__Player-score">{player.score}</div>
-              </div>
-            </Link>
-          )
-        })
-      }
+            </div>
+          </Link>
+        ))}
     </div>
-  )
-}
+  );
+};
