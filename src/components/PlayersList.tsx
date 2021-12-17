@@ -8,7 +8,7 @@ export interface Props {
   onSelect: (playerFromEvent: IPlayer) => void;
 }
 
-export var PlayersList: React.FC<Props> = function ({ onSelect, players }) {
+export const PlayersList: React.FC<Props> = function ({ onSelect, players }) {
   const [sortBy, setSortBy] = useState<string>('Score');
   const [scoreLeader, setScoreLeader] = useState<IPlayer>();
   const [addNewLeaderStyle, setAddNewLeaderStyle] = useState<boolean>(false);
@@ -57,9 +57,10 @@ export var PlayersList: React.FC<Props> = function ({ onSelect, players }) {
                 onSelect(player);
               }}
               key={player.name}
-              className={classNames('playersList__Player',
+              className={classNames(
+                'playersList__Player',
                 { 'playersList__Player--highlighted': (addNewLeaderStyle && i === 0) },
-                { 'playersList__Player--highlighted--first': (players.length === 1) }
+                { 'playersList__Player--highlighted--first': (players.length === 1) },
               )}
             >
               <div className="playersList__Player-ava-name">
